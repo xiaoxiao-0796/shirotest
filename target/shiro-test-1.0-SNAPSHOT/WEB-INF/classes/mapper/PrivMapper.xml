@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaofei.test.mapper.PrivMapper">
+    <resultMap id="Base_RESULT_MAP" type="com.xiaofei.test.model.PrivDO">
+        <result column="ID" property="id" jdbcType="DECIMAL"/>
+        <result column="PRIV_NAME" property="privName" jdbcType="VARCHAR"/>
+        <result column="PRIV_DESC" property="pricDesc" jdbcType="VARCHAR"/>
+
+    </resultMap>
+
+    <select id="queryPrivUrlByStaffCode" resultType="java.lang.String">
+        SELECT rp.priv_name
+        FROM role_priv rp ,role r,user_role sr
+        WHERE  sr.user_name = #{userName,jdbcType=VARCHAR}
+        AND sr.role_name = rp.role_name
+        AND rp.priv_name is NOT NULL
+    </select>
+</mapper>
